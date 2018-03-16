@@ -17,7 +17,8 @@ passport.deserializeUser((id, done) => {
 passport.use(new googlesStrategy({
 	clientID: keys.googleClientID,
 	clientSecret: keys.googleSecret,
-	callbackURL: '/auth/google/kate'
+	callbackURL: '/auth/google/kate',
+	proxy: true
 }, (accessToken, refreshToken, profile, done) => {
 	(User.findOne({googleId: profile.id})).then((foundUser) => {
 		if (foundUser) {
