@@ -17,6 +17,7 @@ module.exports = (app) => {
 	});
 
 	app.get('/api/surveys', requireLogin, async (req, res) => {
+		console.log('hgfhgfjhkhkate123123123123');
 		let surveys = await Survey.find({_user: req.user.id}).select({recipients: false});
 		res.send(surveys);
 	});
@@ -115,7 +116,7 @@ module.exports = (app) => {
 
 	app.post('/api/surveys/webhooks', (req, res) => {
 		const p = new Path('/api/surveys/:surveyId/:choice');
-		console.log('hgfhgfjhkhkate');
+		console.log('hgfhgfjhkhkate123123123123');
 		_.chain(req.body).map(({email, url}) => {
 			const match = p.test(new URL(url).pathname);
 			if (match) {
