@@ -11,14 +11,21 @@
     }
   },
   "dependencies": {
+    "chart": "^0.1.2",
+    "chart.js": "^2.7.2",
     "materialize-css": "^0.100.2",
     "react": "^16.2.0",
+    "react-chart": "0.0.1",
+    "react-chartjs": "^1.2.0",
     "react-dom": "^16.2.0",
+    "react-dropdown": "^1.4.0",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.1",
+    "react-sparklines": "^1.7.0",
     "react-stripe-checkout": "^2.6.3",
-    "redux": "^3.7.2"
+    "redux": "^3.7.2",
+    "redux-form": "^7.3.0"
   },
   "scripts": {
     "start": "react-scripts start",

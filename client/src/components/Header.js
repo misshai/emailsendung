@@ -12,25 +12,27 @@ class Header extends Component {
 				return;
 			case false:
 				return (<li>
-					<a href="/auth/google">Login With Google</a>
+					<a href='/auth/google'>Login With Google</a>
 				</li>);
 			default:
 				return [
-					<li key="1"><Payments/></li>,
-					<li key="3" style={{
+					<li key='1'><Payments/></li>,
+					<li key='3' style={{
 							margin: '0 10 px'
 						}}>Credits:{this.props.auth.credits}</li>,
 					<li key="2">
-						<a href="/api/logout">Logout</a>
+						<a href='/api/logout'>Logout</a>
 					</li>
 				];
 		}
 	}
 	render() {
-		return (<nav>
-			<div className="nav-wrapper">
+		return (<nav style={{
+				marginBottom: '10px'
+			}}>
+			<div className='nav-wrapper'>
 				<Link to={this.props.auth
-						? "/surveys"
+						? '/surveys'
 						: "/"} className="brand-logo">Emaily</Link>
 				<ul id="nav-mobile" className="right hide-on-med-and-down">
 

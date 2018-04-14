@@ -5,8 +5,8 @@ import Header from './Header';
 import {fetchUser} from '../actions';
 
 import Landing from './Landing';
-const Dashboard = () => <h2>Dashboard</h2>;
-const NewSurvey = () => <h2>NewSurvey</h2>;
+import Dashboard from './Dashboard';
+import SurveyNew from "./surveys/SurveyNew";
 
 class App extends Component {
 
@@ -20,7 +20,7 @@ class App extends Component {
 					<Header/>
 					<Route exact={true} path='/' component={Landing}/>
 					<Route exact={true} path='/surveys' component={Dashboard}/>
-					<Route exact={true} path='/surveys/new' component={NewSurvey}/>
+					<Route exact={true} path='/surveys/new' component={SurveyNew}/>
 				</div>
 			</BrowserRouter>
 		</div>);
