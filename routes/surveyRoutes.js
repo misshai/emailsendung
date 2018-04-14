@@ -26,7 +26,7 @@ module.exports = (app) => {
 		res.send('Thanks for voting!');
 	});
 
-	app.post('/api/surveys/:surveyId', requireLogin, async (req, res) => {
+	app.post('/api/surveys/id/:surveyId', requireLogin, async (req, res) => {
 		const {
 			title,
 			subject,
@@ -67,6 +67,7 @@ module.exports = (app) => {
 			res.status(422).send(err);
 		}
 	});
+
 	app.post('/api/surveys/webhooks', (req, res) => {
 		console.log('hgfhgfjhkhkate123123123123webhook');
 		const p = new Path('/api/surveys/:surveyId/:choice');
@@ -95,7 +96,6 @@ module.exports = (app) => {
 				lastResponded: new Date()
 			}).exec();
 		}).value();
-
 		res.send({});
 	});
 

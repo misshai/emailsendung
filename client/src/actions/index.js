@@ -38,7 +38,7 @@ export const submitSurvey = (values, history, sent = true, surveyId) => async di
 	let res;
 	if (surveyId) {
 		console.log(surveyId)
-		res = await axios.post(`/api/surveys/${surveyId}`, values);
+		res = await axios.post(`/api/surveys/id/${surveyId}`, values);
 	} else {
 		res = await axios.post('/api/surveys', values);
 	}
