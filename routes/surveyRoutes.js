@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const _ = require('lodash');
 const {Path} = require('path-parser');
 const {URL} = require('url');
+const logger = require('../services/logger');
 const requireLogin = require('../middlewares/requireLogin');
 const requireCredits = require('../middlewares/requireCredits');
 const Mailer = require('../services/Mailer');
@@ -17,7 +18,6 @@ module.exports = (app) => {
 	});
 
 	app.get('/api/surveys', requireLogin, async (req, res) => {
-		console.log('hgfhgfjhkhkate123123123123');
 		let surveys = await Survey.find({_user: req.user.id}).select({recipients: false});
 		res.send(surveys);
 	});
@@ -45,9 +45,9 @@ module.exports = (app) => {
 					recipients: recipients.split(',').map(email => ({email: email.trim()})),
 					fromField
 				}, surveyTemplate({body, id: surveyId}));
+				mailer.init();
 				await mailer.send();
 			}
-			console.log(surveyId)
 			await Survey.updateOne({
 				_id: surveyId
 			}, {
@@ -63,7 +63,7 @@ module.exports = (app) => {
 
 			res.send(req.user);
 		} catch (err) {
-			console.log(err)
+			logger.error(`Error ! ${err}`);
 			res.status(422).send(err);
 		}
 	});
@@ -132,6 +132,7 @@ module.exports = (app) => {
 					recipients: recipients.split(',').map(email => ({email: email.trim()})),
 					fromField
 				}, surveyTemplate(survey));
+				mailer.init();
 				await mailer.send();
 			}
 			await survey.save();

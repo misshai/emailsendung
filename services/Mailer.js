@@ -1,6 +1,7 @@
 const sendGrid = require('sendgrid');
 const helper = sendGrid.mail;
 const keys = require('../config/keys');
+const constants = require('../config/constants');
 
 class Mailer extends helper.Mail {
 
@@ -11,12 +12,17 @@ class Mailer extends helper.Mail {
 	}, content) {
 		super();
 
-		this.sgAPI = sendGrid(keys.sendGridKey);
 		this.subject = subject;
-		this.from_email = new helper.Email(fromField);
-		this.body = new helper.Content('text/html', content);
-		this.recipients = this.formatAddresses(recipients);
+		this.fromField = fromField;
+		this.content = content;
+		this.recipients = recipients;
+	}
 
+	init() {
+		this.sgAPI = sendGrid(keys.sendGridKey);
+		this.from_email = new helper.Email(this.fromField);
+		this.body = new helper.Content('text/html', this.content);
+		this.recipients = this.formatAddresses(this.recipients);
 		this.addContent(this.body);
 		this.addClickTracking();
 		this.addRecipients();
@@ -44,7 +50,7 @@ class Mailer extends helper.Mail {
 	}
 
 	async send() {
-		const request = this.sgAPI.emptyRequest({method: 'POST', path: '/v3/mail/send', body: this.toJSON()});
+		const request = this.sgAPI.emptyRequest({method: 'POST', path: constants.sendGridPath, body: this.toJSON()});
 		const response = await this.sgAPI.API(request);
 		return response
 	}
